@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+          crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container-fluid">
+        <p class="navbar-brand text-white">
+            <b><span th:text="${usera.email}"></span></b> with roles:
+            <span th:text="${usera.roles}"></span>
+        </p>
+        <form th:action="@{/logout}" method="get">
+            <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+        </form>
+    </div>
+</nav>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left -->
+            <div class="col-2 px-0 ">
+                <ul class="list-group-flush px-0 py-2 ">
+                    <li class="list-group-item active" aria-current="true">Admin</li>
+                    <a class="nav-item nav-link" th:href="@{/user}">User</a>
+                </ul>
+            </div>
+            <!-- Right -->
+            <div class="col-sm-10 text-left tab-content bg-light" id="nav-tabContent">
+                <div class="tab-pane fade show active tab-content text-left" id="userPanel" role="tabpanel">
+                    <h1 style="color: black" class="m-3">Admin panel</h1>
+                    <div class="bg-light">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="/admin">Users Table</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="/adduser">New User</a>
+                            </li>
+                        </ul>
+                        <div class="tab-pane fade show active" id="newUser">
+                            <div class="gray border">
+                                <h3 style="text-align: left; margin: 1%">Add new user</h3>
+                            </div>
+                        </div>
+                        <div class="col-md bg-white border">
+                            <form class="offset-md-4 col-md-4 mt-3 mb-4" th:align="center" th:action="@{/adduser}"
+                                  th:object="${user}" method="POST">
+                                <label for="name"><b>First name</b></label>
+                                <input th:name="name" th:type="text" class="form-control" id="name"/>
+                                <br>
+                                <label for="lastname"><b>Last name</b></label>
+                                <input th:name="lastname" th:type="text" class="form-control" id="lastname"/>
+                                <br>
+                                <label for="age"><b>Age</b></label>
+                                <input th:name="age" th:type="number" class="form-control" id="age"/>
+                                <br>
+                                <label for="email"><b>E-mail</b></label>
+                                <input th:name="email" th:type="text" class="form-control" id="email"/>
+                                <br>
+                                <label for="password"><b>Password</b></label>
+                                <input th:name="password" th:type="password" class="form-control" id="password"/>
+                                <br>
+                                <input th:type="checkbox" th:id="2" th:name="ADMIN" th:value="ADMIN">
+                                <label th:for="ADMIN">Admin</label>
+                                <input th:type="checkbox" th:id="1" th:name="USER" th:value="USER">
+                                <label th:for="USER">User</label>
+                                <br><br>
+                                <button th:type="submit" class="btn btn-success" value="Add User">Add new User</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End of New User -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+</body>
+</html>
+
